@@ -1,0 +1,205 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[dutch]{babel}
+\usepackage[final]{graphicx}
+\usepackage{url}
+\usepackage{a4wide}
+
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{dtklogos}
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+
+\newcommand{\bs}{$\backslash$}
+
+\begin{document}
+\begin{center}
+  \huge Informaticawerktuigen
+
+  \Huge \LaTeX{}: tweede oefenzitting
+\end{center}
+
+\section{\LaTeX{} Beamer}
+In de vorige oefenzitting over \LaTeX{} hebben we gezien hoe je met
+\LaTeX{} artikels kan schrijven en met \BibTeX{} referenties toevoegen.
+In deze oefenzitting zullen we tonen hoe je met \LaTeX{} ook
+presentaties kan maken.
+
+Merk op dat hoewel \LaTeX{} zelf ongeveer de de facto standaard is
+voor het schrijven van wetenschappelijke artikels in
+onderzoeksdomeinen zoals computerwetenschappen of wiskunde, dat Beamer
+veel minder standaard is. Veel wetenschappers gebruiken software zoals
+MS Office Powerpoint of OpenOffice Presenter die ook bij het gewone
+publiek bekend zijn. Voor het groepswerk van dit vak verwachten wij wel
+dat je met \LaTeX{} Beamer een presentatie maakt.
+
+Voor presentaties in \LaTeX{} gebruiken we het pakket Beamer. Dit
+pakket gebruik je op ongeveer dezelfde manier als \LaTeX{} zelf. Je
+maakt een \texttt{.tex} bronbestand, dat je dan door
+\texttt{pdflatex}\footnote{Of een tool zoals \texttt{latexmk} die
+  \texttt{pdflatex} gebruikt} laat compileren
+naar een PDF\@. Deze PDF kan je met een PDF viewer dan in volledig scherm
+weergeven tijdens je presentatie.
+
+Voor \LaTeX{} Beamer bestaat een uitstekende, maar lange
+handleiding.\footnote{\url{http://www.ctan.org/tex-archive/macros/latex/contrib/beamer/doc/beameruserguide.pdf},
+  hoofdstuk 3}
+De handleiding legt niet alleen uit hoe je Beamer moet gebruiken, maar
+geeft ook veel bruikbare tips over het maken van goede presentaties.
+
+\section{De presentatie}
+Open het bestand \texttt{bestanden/presentatie.tex}. Compileer het
+bestand twee keren en bekijk het resultaat. Stel je PDF viewer in op
+de modus ``volledig scherm'' en blader door de presentatie om een idee
+te krijgen van hoe je een Beamer-presentatie gebruikt.
+
+De tekst op Toledo is gebaseerd op een template uit de
+Beamer-distributie. De template is bedoeld als een vertrekpunt voor
+presentaties van ongeveer twintig minuten met een standaardstructuur.
+Je ziet dat er een titelblad, overzicht, inleiding, enkele
+inhoudelijke secties en een samenvatting voorzien zijn. De slides zijn
+gevuld met algemene tips over het gebruik van Beamer en het maken van
+presentaties (bv.\ ``use itemize a lot''). Na elke sectie wordt weer de
+inhoudstafel getoond om aan te geven hoe ver de presentatie gevorderd
+is.
+
+Schakel de ``volledig scherm''-modus weer uit. Onderaan elke pagina vind
+je enkele (lichtjes verborgen) knoppen, probeer het effect hiervan
+uit.
+
+Je ziet dat je met Beamer professioneel uitziende presentaties kan
+maken. In de volgende sectie bekijken we hoe je dit alles zelf
+gebruikt.
+
+\section{De Preambule}
+Bekijk de \LaTeX{}-broncode van de presentatie. Het eerste wat we zien
+is het volgende \texttt{\bs{}documentclass} commando.
+\begin{verbatim}
+\documentclass{beamer}
+\end{verbatim}
+
+In tegenstelling tot de vorige oefenzitting beginnen we dus met de
+\textbf{beamer} documentclass. Dit zorgt ervoor dat er een presentatie
+zal gegenereerd worden. Vervolgens zien we het commando
+\verb~\usetheme{Warsaw}~. Dit stelt een bepaalde stijl in voor de
+slides in de presentatie. De Warsaw-stijl levert vrij gevulde pagina's
+op, met bovenaan de slides telkens een overzicht van de secties en
+onderaan de titel en de namen van de auteurs.
+
+Verander de stijl naar \textbf{default} of \textbf{Bergen}, compileer
+de presentatie en bekijk het effect. Je ziet dat je presentatie er
+telkens ineens helemaal anders uitziet. In de beamer handleiding vind je
+meer info over het gebruik van stijlen (``themes'').
+
+Het volgende commando dat we tegenkomen in de presentatie is
+\texttt{\bs{}usepackage[dutch]\allowbreak{}\{babel\}}. Dit is een commando dat we ook
+gebruikten in artikels en zorgt ervoor dat Nederlandstalige
+woordafbreking en dergelijke gebruikt wordt. Vervolgens worden de
+titel, de auteurs en de datum (of de gelegenheid) van de presentatie
+gedefinieerd.
+\begin{verbatim}
+\title{Titel van deze presentatie}
+\author{Janneke \and Mieke}
+\date{3de Internationale Conferentie over ABCD}
+\end{verbatim}
+
+Verzin een titel voor een presentatie over jullie groepswerk en vul
+deze titel in. Vul de namen van de leden van je groepje in als auteurs. Je kunt
+meerdere namen scheiden met \texttt{\textbackslash and}. Als date vul je in ``Presentatie
+groepswerken Informaticawerktuigen''.
+
+Na deze informatie vinden we een stuk code binnen een
+\verb~\AtBeginSubsection[]~ commando. Dit hoef je niet te begrijpen,
+maar zorgt ervoor dat er aan het begin van elke subsectie een
+inhoudstafel wordt getoond met de huidige subsectie aangeduid, en als
+titel ``Outline''.
+
+\section{De eigenlijke presentatie}
+Hierna komen we bij het \verb~\begin{document}~ commando, dat het
+begin van het eigenlijke document aangeeft. Tussen
+\verb~\begin{frame}~ en \verb~\end{frame}~ wordt telkens een slide
+gedefinieerd. We zien dat er eerst een titelslide en vervolgens een
+slide met de inhoudstafel gedefinieerd worden. Zoals je ziet in die
+tweede slide kan je aan het \verb~\begin{frame}~ commando een
+argument meegeven dat de titel van de slide bepaalt. Vervang de
+titel ``Outline'' door ``Inhoud''.
+
+Maak nu na de inhoudstafel een nieuwe slide aan met als titel ``Het
+vak Informaticawerktuigen''. In de slide geef je een overzicht van een
+aantal onderwerpen die al behandeld zijn in het vak (bijvoorbeeld:
+\LaTeX{}, \BibTeX{}, Linux, etc.). Som deze onderwerpen op met
+behulp van een \texttt{itemize} omgeving. Zoek desnoods op in de
+Beamer handleiding hoe je dit gebruikt.\footnote{tip: zie sectie 3.8}
+
+In de voorbeeldpresentatie heb je gezien dat je ervoor kan zorgen dat
+niet alle tekst op de slide tegelijk verschijnt. Beginnende gebruikers
+van presentatietools maken hier vaak overdreven gebruik van (wat er
+snel voor zorgt dat je de aandacht van het publiek te veel afleidt),
+maar soms is het wel nuttig. In deze slide willen we bijvoorbeeld
+enkele dingen toevoegen aan het lijstje van de inhoud van het vak
+Informaticawerktuigen die jullie nog niet gezien hebben. Voeg de tekst
+``Programmeren in C'' en ``Leren presenteren'' toe aan
+het lijstje en zorg ervoor dat deze eerst verborgen blijven op de
+slide. De twee toevoegingen moeten wel tegelijk verschijnen. Zoek op
+in de Beamer handleiding hoe je dit doet of kijk even verder in het
+voorbeeldbestand hoe dit daar gedaan wordt.
+
+Zoek op hoe je het \verb~\alert~ commando kan gebruiken in een slide.
+Zorg ervoor dat \LaTeX{} Beamer voorkomt in bovenstaand lijstje en
+zorg ervoor dat het eerst gewoon in het lijstje voorkomt, maar bij de
+volgende stap in je presentatie in het rood komt te staan. Pas dan
+mogen de nog niet geziene dingen (C en presenteren) verschijnen.
+
+\section{Enkele basis-presentatietips}
+Goede presentaties maken is niet eenvoudig. Beginners en zelfs
+mensen met ervaring maken vaak basisfouten. De basisregel die je moet
+in je achterhoofd houden is dat de presentatie voornamelijk dient als
+een overzicht van wat je wil vertellen, zodat je publiek beter de
+structuur kan volgen van wat je vertelt. Daarbovenop is een
+presentatie handig om formules, tabellen en afbeeldingen te tonen
+waarover je iets wilt vertellen. Maar in al te veel presentaties zie
+je volgende fouten terugkomen:
+
+\begin{description}
+  \item[Te veel animaties] Animaties leiden snel de aandacht af van je
+        publiek. Gebruik ze enkel als ze iets bijdragen aan wat je wilt
+        vertellen. Ook tekst die verschijnt bij opeenvolgende stappen in je
+        presentatie leidt snel de aandacht af. Maak hier enkel \textbf{in
+          heel beperkte mate} gebruik van.
+  \item[Te veel details] In een presentatie mag je over het algemeen
+        nooit meer details tonen dan je mondeling uitlegt. Verwacht nooit
+        dat je publiek iets gaat lezen op je slide dat je niet mondeling
+        toelicht. Zorg ervoor dat je illustraties enkel de essentie tonen.
+  \item[Te veel tekst] Gebruik nooit volzinnen in een presentatie. Maak
+        je zinnen zo kort mogelijk en beperk je nog het liefst tot enkel
+        kernwoorden. Gebruik kernachtige titels. Een algemene richtlijn is
+        dat een slide ongeveer 20 \`a 40 woorden mag bevatten.
+  \item[Te weinig kleur] Visuele aanwijzingen in je tekst zijn veel
+        duidelijker voor je publiek dan tekst. Zet iets bijvoorbeeld
+        tijdelijk in het rood als je er in je uitleg de aandacht op wil
+        trekken. Gebruik veel kleur, opsommingen en dergelijke.
+  \item[Te veel slides] Als algemene richtlijn mag je nooit meer dan
+        \'e\'en slide per minuut presentatie hebben en liefst minder, met
+        desnoods een uitzondering voor tussentijdse inhoudstafels en dergelijke.
+        Presentaties die te veel over tijd gaan worden op bijvoorbeeld
+        wetenschappelijke conferenties niet getolereerd en meestal koudweg
+        afgebroken.
+\end{description}
+
+\section{Ten slotte}
+Tijdens de rest van deze oefenzitting is het de bedoeling dat jullie
+beginnen aan een presentatie voor jullie groepswerk. De tijd die
+jullie zullen hebben is heel beperkt, dus denk op voorhand heel goed
+na over welk deel van jullie inhoud jullie zullen vertellen.
+
+
+\flushright
+\input{addendum.tex}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
